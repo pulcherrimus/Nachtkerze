@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Posts</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional CSS for the All Posts page */
+        .post-list {
+            max-height: 400px; /* Limit the height of the post list and make it scrollable */
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding: 10px;
+            background-color: #333;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #555;
+            border-radius: 5px;
+            cursor: pointer; /* Add cursor pointer for clickable effect */
+        }
+
+        .post-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .post-author {
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        .button-container {
+            margin-top: 20px; /* Add margin above the button */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content-wrap">
+            <h2>All Posts</h2>
+            <div class="button-container">
+                <a href="forum.html" class="btn">Back to Forum</a>
+            </div>
+            <div class="post-list" id="post-list">
+                <!-- Dynamically populated post items will be added here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve posts from localStorage
+        var posts = JSON.parse(localStorage.getItem('posts')) || [];
+
+        // Display posts in the post list
+        var postList = document.getElementById('post-list');
+        posts.forEach(function(post, index) {
+            var postItem = document.createElement('div');
+            postItem.classList.add('post-item');
+
+            var titleElement = document.createElement('div');
+            titleElement.classList.add('post-title');
+            titleElement.textContent = post.title;
+
+            var authorElement = document.createElement('div');
+            authorElement.classList.add('post-author');
+            authorElement.textContent = 'Author: ' + post.author;
+
+            postItem.appendChild(titleElement);
+            postItem.appendChild(authorElement);
+
+            // Add click event to open individual post page
+            postItem.addEventListener('click', function() {
+                window.location.href = 'post.html?id=' + index;
+            });
+
+            postList.appendChild(postItem);
+        });
+    </script>
+</body>
+</html>
