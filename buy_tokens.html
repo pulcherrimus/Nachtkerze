@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Tokens</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content-wrap">
+            <h2>Buy Tokens</h2>
+            <div class="button-container">
+                <a href="home.html" class="btn">Back to Homepage</a>
+            </div>
+            <p id="user-info"></p>
+            <p id="tokenCount"></p>
+            <div id="redeem-section">
+                <p>Redeem Gift Card:</p>
+                <input type="text" id="gift-card-input" placeholder="Enter Gift Card Code">
+                <button id="redeem-btn" onclick="redeemGiftCard()">Redeem</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="buy_tokens.js" defer></script>
+    <script>
+        
+        // Check if user is logged in
+        if (!localStorage.getItem('loggedInUser')) {
+            window.location.href = 'login.html';
+        } else {
+            // Retrieve user info
+            var username = localStorage.getItem('loggedInUser');
+            var tokenCount = localStorage.getItem('tokenCount') || 0;
+            document.getElementById('user-info').innerText = 'You are logged in as: ' + username;
+            document.getElementById('tokenCount').innerText = 'Token Count: ' + tokenCount;
+        }
+    </script>
+</body>
+</html>

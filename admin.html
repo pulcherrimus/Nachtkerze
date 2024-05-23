@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        #admin-panel {
+            display: none;
+        }
+    </style>
+    <script src="admin.js" defer></script>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    <div id="password-prompt">
+        <label for="admin-password">Enter Admin Password:</label>
+        <input type="password" id="admin-password">
+        <button onclick="checkPassword()">Submit</button>
+    </div>
+    <div id="admin-panel">
+        <label for="token-amount">Token Amount:</label>
+        <select id="token-amount">
+            <option value="1000">1000 Tokens</option>
+            <option value="2300">2300 Tokens</option>
+            <option value="6000">6000 Tokens</option>
+        </select>
+        <button onclick="generateCode()">Generate Code</button>
+        <div id="code-display"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content-wrap">
+            <h2>Marketplace</h2>
+            <div class="button-container">
+                <a href="home.html" class="btn">Back to Homepage</a>
+            </div>
+            <p id="user-info"></p>
+            <p>This is a placeholder for the marketplace page.</p>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve the username from localStorage
+        var username = localStorage.getItem('loggedInUser');
+        if (username) {
+            document.getElementById('user-info').innerText = 'You are logged in as: ' + username;
+        }
+    </script>
+     <script>
+        // Check if user is logged in
+        if (!localStorage.getItem('loggedInUser')) {
+            window.location.href = 'login.html';
+        } else {
+            // Retrieve user info
+            var username = localStorage.getItem('loggedInUser');
+            var tokenCount = localStorage.getItem('tokenCount') || 0;
+            document.getElementById('user-info').innerText = 'You are logged in as: ' + username;
+            document.getElementById('tokenCount').innerText = tokenCount;
+        }
+    </script>
+</body>
+</html>

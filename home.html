@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="checkLogin.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="content-wrap">
+            <h2>Welcome</h2>
+            <div class="button-container">
+                <a href="forum.html" class="btn">Forum</a>
+                <a href="marketplace.html" class="btn">Marketplace</a>
+                <a href="buy_tokens.html" class="btn">Buy Tokens</a>
+            </div>
+            <p id="user-info"></p>
+            <p>Your token count: <span id="tokenCount"></span></p>
+            <p><a href="logout.html" id="logout-btn">Logout</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        if (!localStorage.getItem('loggedInUser')) {
+            window.location.href = 'login.html';
+        } else {
+            // Retrieve user info
+            var username = localStorage.getItem('loggedInUser');
+            var tokenCount = localStorage.getItem('tokenCount') || 0;
+            document.getElementById('user-info').innerText = 'You are logged in as: ' + username;
+            document.getElementById('tokenCount').innerText = tokenCount;
+        }
+    </script>
+</body>
+</html>
