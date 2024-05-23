@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add any additional styles for individual post pages */
+        .post-container {
+            padding: 20px;
+            background-color: #333;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .post-content {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 10px; /* Add margin bottom for spacing */
+        }
+
+        .post-author {
+            margin-top: 10px;
+            color: #ccc;
+            font-size: 16px;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content-wrap">
+            <div class="post-container" id="post-container">
+                <!-- Dynamically populated post content will be added here -->
+            </div>
+            <div class="button-container">
+                <a href="all_posts.html" class="btn">Back to All Posts</a>
+            </div>            
+        </div>
+    </div>
+
+    <script>
+        // Retrieve post ID from query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = parseInt(urlParams.get('id'));
+
+        // Retrieve posts from localStorage
+        const posts = JSON.parse(localStorage.getItem('posts')) || [];
+
+        // Display individual post content
+        const postContainer = document.getElementById('post-container');
+        if (postId >= 0 && postId < posts.length) {
+            const post = posts[postId];
+            const titleElement = document.createElement('div');
+            titleElement.classList.add('post-title');
+            titleElement.textContent = post.title;
+
+            const contentElement = document.createElement('div');
+            contentElement.classList.add('post-content');
+            contentElement.textContent = post.content;
+
+            const authorElement = document.createElement('div');
+            authorElement.classList.add('post-author');
+            authorElement.textContent = 'Author: ' + post.author;
+
+            postContainer.appendChild(titleElement);
+            postContainer.appendChild(contentElement);
+            postContainer.appendChild(authorElement);
+        } else {
+            postContainer.textContent = 'Post not found.';
+        }
+    </script>
+</body>
+</html>
