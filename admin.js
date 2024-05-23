@@ -1,6 +1,6 @@
 function checkPassword() {
     var password = document.getElementById('admin-password').value;
-    if (password === 'Blankenese10?') {
+    if (password === 'admin1234') {
         document.getElementById('password-prompt').style.display = 'none';
         document.getElementById('admin-panel').style.display = 'block';
     } else {
