@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content-wrap">
+            <h2>Create a New Post</h2>
+            <form id="create-post-form">
+                <label for="post-title">Title:</label>
+                <input type="text" id="post-title" name="post-title" required>
+                
+                <label for="post-content">Content:</label>
+                <textarea id="post-content" name="post-content" rows="5" required></textarea>
+                
+                <input type="submit" value="Create Post">
+            </form>
+            <div class="button-container">
+                <a href="forum.html" class="btn">Back to Forum</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createPost() {
+            var title = document.getElementById('post-title').value;
+            var content = document.getElementById('post-content').value;
+            var author = localStorage.getItem('loggedInUser');
+            
+            // Create a post object
+            var post = { title: title, content: content, author: author };
+            
+            // Store the post object in localStorage
+            var posts = JSON.parse(localStorage.getItem('posts')) || [];
+            posts.push(post);
+            localStorage.setItem('posts', JSON.stringify(posts));
+        }
+
+        function confirmAndCreatePost() {
+            if (confirm("Are you sure you want to create this post? This action will cost you 10 tokens.")) {
+                // Check if the user has enough tokens
+                var currentTokenCount = parseInt(localStorage.getItem('tokenCount')) || 0;
+                if (currentTokenCount >= 10) {
+                    // Deduct 10 tokens and create the post
+                    localStorage.setItem('tokenCount', currentTokenCount - 10);
+                    createPost();
+                    alert('Post created successfully! 10 tokens have been deducted from your account.');
+                    window.location.href = 'forum.html'; // Redirect to forum page
+                } else {
+                    alert('You do not have enough tokens to create a post.');
+                }
+            }
+        }
+        
+        // Event listener for form submission
+        document.getElementById('create-post-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            confirmAndCreatePost(); // Call confirmAndCreatePost function
+        });
+    </script>
+</body>
+</html>
